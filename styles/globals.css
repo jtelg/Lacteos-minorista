@@ -2,6 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "brother-400";
+  src: url("../public/font/Brother 1816/Brother-1816-Regular.ttf")
+    format("opentype");
+}
+
+@font-face {
+  font-family: "brother-500";
+  src: url("../public/font/Brother 1816/Brother-1816-Medium.ttf")
+    format("opentype");
+}
+.brother-500 {
+  font-family: "brother-500";
+}
+@font-face {
+  font-family: "brother-700";
+  src: url("../public/font/Brother 1816/Brother-1816-Bold.ttf")
+    format("opentype");
+}
+.brother-700 {
+  font-family: "brother-700";
+}
+@font-face {
+  font-family: "brother-800";
+  src: url("../public/font/Brother 1816/Brother-1816-ExtraBold.ttf")
+    format("opentype");
+}
+.brother-800 {
+  font-family: "brother-800";
+}
+
 html,
 body {
   padding: 0;
