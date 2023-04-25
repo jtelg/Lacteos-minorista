@@ -1,6 +1,6 @@
 import React from "react";
 
-const Mobile = ({ state }) => {
+const Mobile = ({ state_carrito }) => {
   return (
     <div className="md:hidden">
       {/* <button

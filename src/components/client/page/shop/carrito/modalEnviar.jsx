@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
 import Typography from "@mui/material/Typography";
 import Swal from "sweetalert2";
-import APIConsultas from "../../../services/consultas";
-import { useDispatch } from "react-redux";
-import { CARRITO_DELETE_ALL } from "../../../redux/actions";
+import APIConsultas from "../../../../../services/consultas";
+import { useDispatch, useSelector } from "react-redux";
+import { CARRITO_DELETE_ALL } from "../../../../../redux/actions";
 import { useRouter } from "next/router";
+import senderFRONT from "../../../../../utils/whatsapp/senderFront";
 
 const style = {
   position: "absolute",
@@ -25,6 +26,8 @@ const style = {
 const ModalEnviar = ({ pedidos }) => {
   const dispatch = useDispatch();
   const router = useRouter();
+  const globalVars = useSelector((s) => s.globalVars);
+
   const [open, setOpen] = useState(false);
   const [formulario, setFormulario] = useState({
     nombre: "",
@@ -39,11 +42,9 @@ const ModalEnviar = ({ pedidos }) => {
     e.preventDefault();
     setFormulario({ ...formulario, [e.target.name]: e.target.value });
   };
+
   const venta_add = () => {
-    // const total = pedidos.reduce(
-    //   (a, b) => a + b.precioventa * b.cantidadForm,
-    //   0
-    // );
+    const total = pedidos.reduce((a, b) => a + b.precioxpers * b.personas, 0);
     const venta = {
       iduser: 0,
       CP: "5900",
@@ -58,11 +59,11 @@ const ModalEnviar = ({ pedidos }) => {
       otra_persona: 0,
       retira_nombre: formulario.nombre,
       retira_apellido: null,
-      montototal: 0,
+      montototal: total,
       tipo_pago: "Efectivo",
       seguimiento_idestado: 1,
       comentario: "",
-      estado: "No Visible",
+      estado: "Pendiente",
       anulado_porque: null,
       fec_anulado: null,
     };
@@ -79,12 +80,12 @@ const ModalEnviar = ({ pedidos }) => {
         });
         const obj = venta_add();
         const re = await APIConsultas.ventas.VENTAS_ADD(obj, pedidos);
-        // senderFRONT.enviaPedido(
-        //   globalVars[0].valor,
-        //   entrega,
-        //   arr_cartprods,
-        //   re.insertId
-        // );
+        senderFRONT.enviaPedido(
+          globalVars[0].valor,
+          formulario,
+          pedidos,
+          re.insertId
+        );
         dispatch(CARRITO_DELETE_ALL());
         Swal.close();
         handleClose();
@@ -98,12 +99,21 @@ const ModalEnviar = ({ pedidos }) => {
   };
   return (
     <div>
-      <button
-        onClick={handleOpen}
-        className="bg-primary-500 text-white px-4 py-2 text-xl rounded-lg hover:shadow-[0_2px_5px_rgba(0,0,0,0.1)] shadow-[0_2px_5px_rgba(0,0,0,30%)] "
-      >
-        Enviar pedido
-      </button>
+      {formulario.nombre && formulario.email ? (
+        <button
+          onClick={handleOpen}
+          className="bg-primary-500 text-white px-4 py-2 text-xl brother-500   rounded-lg hover:shadow-[0_2px_5px_rgba(0,0,0,0.1)] shadow-[0_2px_5px_rgba(0,0,0,30%)] "
+        >
+          Enviar pedido
+        </button>
+      ) : (
+        <button
+          onClick={() => router.push("/picadas")}
+          className="bg-primary-500 text-white px-4 py-2 text-xl brother-500   rounded-lg hover:shadow-[0_2px_5px_rgba(0,0,0,0.1)] shadow-[0_2px_5px_rgba(0,0,0,30%)] "
+        >
+          Comenzar a comprar
+        </button>
+      )}
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
