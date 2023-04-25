@@ -1,4 +1,5 @@
 import { conexionDB } from "../config/db";
+import APIConsultas from "../services/consultas";
 const ctrlVenta = {
   VENTA_ADD: async (req, res, resolve) => {
     await conexionDB.query("SET time_zone = '-03:00';");
@@ -73,7 +74,7 @@ const ctrlVenta = {
     let string = "";
     req.body.arrProd.forEach((prod) => {
       string += `('${idventa}', '${prod.idpicada}', '${null}', '${null}',
-       '0', '${prod.personas}', '${prod.comentario || ""}'),`;
+       '0', '${prod.cantidadForm}', '${prod.comentario || ""}'),`;
     });
     string = string.substring(0, string.length - 1);
 
@@ -97,6 +98,97 @@ const ctrlVenta = {
                       `;
     try {
       await conexionDB.query(sqlS);
+      res.end();
+    } catch (error) {
+      console.error(error);
+      res.status(500).end();
+      return resolve();
+    }
+  },
+  VENTA_GET_LIST: async (req, res, resolve) => {
+    const sqlApply = `CALL SP_ventas_get_tablero(${req.query.idcaja},${req.query.bnd})`;
+
+    try {
+      const [result] = await conexionDB.query(sqlApply);
+      let data = [];
+      if (result[0]) {
+        data = result[0];
+      }
+      res.write(JSON.stringify(data));
+      res.end();
+    } catch (error) {
+      console.error("error", error);
+      res.status(500).end();
+      return resolve();
+    }
+  },
+  VENTA_GET_XID: async (req, res, resolve) => {
+    const sql = `CALL SP_venta_get_xid('${req.query.id}')`;
+    try {
+      // const [resultTime] = await conexionDB.query(sqltime);
+      const [result] = await conexionDB.query(sql);
+      res.write(JSON.stringify(result[0]));
+      res.end();
+    } catch (error) {
+      console.error(error);
+      res.status(500).end();
+      return resolve();
+    }
+  },
+  VENTA_GET_PROD_XID: async (req, res, resolve) => {
+    const sql = `CALL SP_venta_get_prod_xid('${req.query.id}')`;
+
+    try {
+      // const [resultTime] = await conexionDB.query(sqltime);
+      const [result] = await conexionDB.query(sql);
+      res.write(JSON.stringify(result[0]));
+      res.end();
+    } catch (error) {
+      console.error(error);
+      res.status(500).end();
+      return resolve();
+    }
+  },
+  UPDATE_ESTADO: async (req, res, resolve) => {
+    const sql = `UPDATE venta SET 
+                tel_wpp = '${req.body.wppnumber}',
+                estado = '${req.body.newEstado}',
+                timestamp = '${req.body.timestamp}'
+               WHERE idventa = '${req.body.idventa}'`;
+    try {
+      const [result] = await conexionDB.query(sql);
+      res.write(JSON.stringify(result));
+      res.end();
+    } catch (error) {
+      console.error(error);
+      res.status(500).end();
+      return resolve();
+    }
+  },
+  UPDATE_SEGUIMIENTO: async (req, res, resolve) => {
+    const sql = `UPDATE seguimiento SET 
+                idestado = '${req.body.idestado}',
+                ${req.body.name} = '${req.body.value}'
+               WHERE idventa = '${req.body.idventa}'`;
+    try {
+      const [result] = await conexionDB.query(sql);
+      res.write(JSON.stringify(result));
+      await APIConsultas.ventas.VENTA_RELOAD();
+      res.end();
+    } catch (error) {
+      console.error(error);
+      res.status(500).end();
+      return resolve();
+    }
+  },
+  UPDATE_XCAMPO: async (req, res, resolve) => {
+    const { campo, valor, idventa } = req.body;
+    const sql = `UPDATE venta SET 
+                  ${campo} = '${valor}'
+                WHERE idventa = '${idventa}'`;
+    try {
+      const [result] = await conexionDB.query(sql);
+      res.write(JSON.stringify(result));
       res.end();
     } catch (error) {
       console.error(error);

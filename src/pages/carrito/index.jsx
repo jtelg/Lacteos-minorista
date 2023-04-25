@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from "react";
-import TablaPedidos from "../../components/client/carrito/tablaPedidos";
+import TablaPedidos from "../../components/client/page/shop/carrito/tablaPedidos";
 import { useSelector } from "react-redux";
-import ModalEnviar from "../../components/client/carrito/modalEnviar";
+import ModalEnviar from "../../components/client/page/shop/carrito/modalEnviar";
 import Head from "next/head";
 
 const Carrito = () => {
   const [pedidos, setPedidos] = useState([]);
+  const [total, setTotal] = useState(0);
   const arr_pedidos = useSelector((s) => s.carrito);
 
   useEffect(() => {
     setPedidos(arr_pedidos);
-
-    console.log(arr_pedidos);
+    setTotal(
+      arr_pedidos
+        ?.reduce((a, b) => a + b.precioxpers * b.cantidadForm, 0)
+        .toLocaleString("de")
+    );
   }, [arr_pedidos]);
 
   return (
@@ -38,7 +42,12 @@ const Carrito = () => {
                 El total del carrito es una aproximación, una vez armado el
                 pedido, te enviaremos el peso y precio correspondiente.
               </p>
-              <div>
+              <div className="flex items-center gap-4">
+                <div>
+                  <h1 className="text-2xl  brother-800 text-primary-600">
+                    TOTAL: <span className="text-secondary">${total}</span>
+                  </h1>
+                </div>
                 <ModalEnviar pedidos={pedidos}></ModalEnviar>
               </div>
             </div>

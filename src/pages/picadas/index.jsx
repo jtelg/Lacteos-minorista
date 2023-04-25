@@ -1,29 +1,8 @@
-import React, { useEffect, useState } from "react";
-import CardPicadas from "../../components/client/cards/cardPicadas";
-import APIConsultas from "../../services/consultas";
-import { useSelector } from "react-redux";
+import React from "react";
 import Head from "next/head";
+import ListProducts from "../../components/client/page/shop/listProducts";
 
 const Picadas = () => {
-  const [arr_picadas, setArr_picadas] = useState([]);
-  const state_carrito = useSelector((state) => state.carrito);
-
-  useEffect(() => {
-    APIConsultas.picadas.GET().then((repscateg) => {
-      setArr_picadas(repscateg);
-    });
-  }, []);
-
-  // useEffect(() => {
-  //   console.log(state_carrito);
-  // }, [state_carrito]);
-
-  const checkProduct = (producto) => {
-    return state_carrito?.find((e) => e.idpicada === producto.idpicada)
-      ? true
-      : false;
-  };
-
   return (
     <>
       <Head>
@@ -40,15 +19,7 @@ const Picadas = () => {
             Nuestras picadas
           </h2>
         </div>
-        <div className="flex flex-col gap-8 mt-8">
-          {arr_picadas.map((p) => (
-            <CardPicadas
-              key={p.idpicada}
-              info={p}
-              check={checkProduct(p)}
-            ></CardPicadas>
-          ))}
-        </div>
+        <ListProducts></ListProducts>
       </div>
     </>
   );

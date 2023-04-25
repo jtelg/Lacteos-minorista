@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { DELETE_CART } from "../../../redux/actions";
+import { DELETE_CART } from "../../../../../redux/actions";
 
 const TablaPedidos = ({ pedidos }) => {
   const dispatch = useDispatch();
@@ -18,10 +18,11 @@ const TablaPedidos = ({ pedidos }) => {
   return (
     <div>
       <ul className="w-full flex justify-between brother-800 text-primary-600 border-b-2">
-        <li className="w-[25%] text-center">ID</li>
-        <li className="w-[25%] text-center">NOMBRE</li>
-        <li className="w-[25%] text-center">CANTIDADES</li>
-        <li className="w-[25%] text-center">ACCIONES</li>
+        <li className="w-[20%] text-center">ID</li>
+        <li className="w-[20%] text-center">NOMBRE</li>
+        <li className="w-[20%] text-center">CANTIDADES</li>
+        <li className="w-[20%] text-center">PRECIO X PERSONA</li>
+        <li className="w-[20%] text-center">ACCIONES</li>
       </ul>
       {arr_pedidos.length > 0 ? (
         arr_pedidos.map((pedido) => (
@@ -34,9 +35,10 @@ const TablaPedidos = ({ pedidos }) => {
               Picada <span className="text-secondary">{pedido.nombre}</span>
             </li>
             <li className="w-[25%] text-center">
-              {pedido.personas}{" "}
+              {pedido.cantidadForm}{" "}
               <span className="text-secondary">personas </span>
             </li>
+            <li className="w-[25%] text-center">$ {pedido.precioxpers} </li>
             <li className="w-[25%] text-center">
               <button onClick={() => eliminarCart(pedido.idpicada)}>
                 <i className="bx bxs-trash text-2xl text-red-700"></i>
