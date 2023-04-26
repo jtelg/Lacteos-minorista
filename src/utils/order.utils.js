@@ -1,6 +1,6 @@
 import APIConsultas from '../services/consultas';
 import ServUsos from './usos';
-import senderFRONT from './whatsapp/senderFront';
+// import senderFRONT from './whatsapp/senderFront';
 
 // const ctrlNumber = (number) => {
 //   // si no tiene caracteristicas se las agrega
@@ -16,7 +16,7 @@ const utilsOrderStatus = {
       idventa: venta.idventa,
       name: estado,
       value: ServUsos.newDateMysql(),
-      idestado: idestado
+      idestado
     };
     APIConsultas.ventas
       .UPDATE_SEGUIMIENTO(objSeguimiento, true)
