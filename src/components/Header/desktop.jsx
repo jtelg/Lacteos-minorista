@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
+import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 // const arr_nav = [{ label: "Picadas", route: "/picadas", icon: "" }];
 
 const Desktop = ({ state_carrito, state_nav }) => {
   const router = useRouter();
-  const [path, setPath] = useState("");
+  const [path, setPath] = useState('');
 
   useEffect(() => {
-    const path = router.pathname.split("/")[1];
+    const path = router.pathname.split('/')[1];
     const newPath = path[0]?.toUpperCase() + path.substring(1);
     setPath(newPath);
   }, [router]);
@@ -25,8 +25,8 @@ const Desktop = ({ state_carrito, state_nav }) => {
                   href={e.route}
                   className={`text-[18px] ${
                     path === e.label || router.pathname === e.route
-                      ? "text-secondary brother-800 "
-                      : "text-white  "
+                      ? 'text-secondary brother-800 '
+                      : 'text-white  '
                   } `}
                 >
                   {e.label}
@@ -35,7 +35,7 @@ const Desktop = ({ state_carrito, state_nav }) => {
             )
         )}
         <li>
-          <Link href={"/carrito"} className={`text-[18px] text-white `}>
+          <Link href={'/carrito'} className={`text-[18px] text-white `}>
             <div className="relative">
               {state_carrito.length > 0 && (
                 <div className="absolute top-[-7px] right-[-10px] bg-red-500 rounded-full w-4 h-4 text-xs z-[-1] flex items-center justify-center ">

@@ -1,11 +1,11 @@
-import React from "react";
-import APIConsultas from "../../../services/consultas";
+import React from 'react';
+import APIConsultas from '../../../services/consultas';
 class SearchProducto extends React.Component {
   state = {
     timer: null,
     productos: [],
     prodFilter: [],
-    visible: false,
+    visible: false
   };
 
   productoSelect = [];
@@ -21,7 +21,7 @@ class SearchProducto extends React.Component {
       });
       this.setState({
         productos: dataprod,
-        prodFilter: dataprod,
+        prodFilter: dataprod
       });
       this.controlClick();
     });
@@ -30,8 +30,8 @@ class SearchProducto extends React.Component {
   // Evento que controla cuando se hace click en el contenedor
   // del buscador o los items, o cuando se hace click fuera
   controlClick() {
-    document.addEventListener("mouseup", (event) => {
-      const obj = document.getElementById("contenedor");
+    document.addEventListener('mouseup', (event) => {
+      const obj = document.getElementById('contenedor');
       if (!obj) return;
       if (!obj.contains(event.target)) {
         this.setState({ visible: false });
@@ -58,7 +58,7 @@ class SearchProducto extends React.Component {
         }
         this.setState({ visible: false });
         return this.state.productos;
-      }),
+      })
     });
   }
 
@@ -86,12 +86,12 @@ class SearchProducto extends React.Component {
             </label>
             <div
               className={`w-full flex flex-col gap-4 border-primary-500 rounded-lg transition-all ${
-                this.state.visible ? "border-2" : "border-0"
+                this.state.visible ? 'border-2' : 'border-0'
               }`}
             >
               <input
                 className={`px-3 h-[2.45rem] rounded-lg border-primary-500 transition-all focus:border-primary-600 w-full outline-none ${
-                  this.state.visible ? "border-0" : "border-2"
+                  this.state.visible ? 'border-0' : 'border-2'
                 }`}
                 id="search"
                 name="search"
@@ -101,7 +101,7 @@ class SearchProducto extends React.Component {
               />
               <ul
                 className={`border border-gray-200 rounded overflow-auto max-h-[170px] ${
-                  this.state.visible ? "block" : "hidden"
+                  this.state.visible ? 'block' : 'hidden'
                 }`}
               >
                 {this.state.prodFilter.map((prod, index) => (
@@ -109,12 +109,12 @@ class SearchProducto extends React.Component {
                     key={index}
                     className="px-4 py-2 bg-white hover:bg-primary-100 hover:text-primary-700 flex justify-between
                   border-b last:border-none border-gray-200 transition-all duration-300 ease-in-out cursor-pointer"
-                    htmlFor={"check" + index}
+                    htmlFor={'check' + index}
                   >
                     <p>{prod.nombre}</p>
                     <input
                       type="checkbox"
-                      id={"check" + index}
+                      id={'check' + index}
                       onChange={(ev) => this.selectProducto(ev, prod, index)}
                       value={prod.checked}
                     />

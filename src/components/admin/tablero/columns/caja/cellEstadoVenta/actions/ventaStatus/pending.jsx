@@ -10,7 +10,7 @@ const OrderPending = (props) => {
   const handlePrint = useReactToPrint({
     content: () => componentRef.current
   });
-  const [arrProductos, setArrProductos] = useState([]);
+  // const [arrProductos, setArrProductos] = useState([]);
   const [datosVenta, setDatosVenta] = useState({});
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -19,7 +19,6 @@ const OrderPending = (props) => {
       APIConsultas.ventas
         .GET_PRODS_XID(props.datosVenta.idventa)
         .then((res) => {
-          setArrProductos(res);
           setLoading(false);
         });
     };

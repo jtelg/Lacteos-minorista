@@ -13,7 +13,6 @@ export class SelectorIndexCaja extends Component {
       props.dataCaja.idcaja > 0
         ? props.dataCaja.arrventas.length
         : props.arr_use.length;
-    let countEgresos = props.arrEgresos.length;
     if (props.dataCaja) {
       if (props.dataCaja.arrEgresos) {
         countEgresos = props.dataCaja.arrEgresos.length;

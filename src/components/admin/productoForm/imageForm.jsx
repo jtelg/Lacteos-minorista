@@ -1,8 +1,8 @@
-import Image from "next/image";
-import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
-import APIConsultas from "../../../services/consultas";
-import ModalList from "../../utils/modalList";
+import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
+import APIConsultas from '../../../services/consultas';
+import ModalList from '../../utils/modalList';
 const ImageForm = (props) => {
   const [arrImgs, setArrImgs] = useState([]);
 
@@ -17,10 +17,10 @@ const ImageForm = (props) => {
     for (const file of arrfiles) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        const image = document.createElement("img");
+        const image = document.createElement('img');
         image.onload = function () {
           // Resize the image
-          const canvas = document.createElement("canvas");
+          const canvas = document.createElement('canvas');
           const max_size = 1450; // TODO : pull max size from a site config
           let width = image.width;
           let height = image.height;
@@ -37,14 +37,14 @@ const ImageForm = (props) => {
           }
           canvas.width = width;
           canvas.height = height;
-          canvas.getContext("2d").drawImage(image, 0, 0, width, height);
+          canvas.getContext('2d').drawImage(image, 0, 0, width, height);
           // const img = dataURLtoBlob(canvas.toDataURL('image/png', 0.7));
-          setImageServer(canvas.toDataURL("image/png", 0.7), file.name);
+          setImageServer(canvas.toDataURL('image/png', 0.7), file.name);
           // canvas.toDataURL('image/png');
         };
         image.src = e.target.result;
       };
-      if (file !== "length" && file !== "item") {
+      if (file !== 'length' && file !== 'item') {
         reader.readAsDataURL(file);
       }
     }
@@ -62,13 +62,13 @@ const ImageForm = (props) => {
         const obj = {
           preventDefault: () => {},
           target: {
-            name: "arrimagesIndiv",
-            value: arrim,
-          },
+            name: 'arrimagesIndiv',
+            value: arrim
+          }
         };
         props.setUpdate(obj);
         return toast.success(`Dato actualizado!`, {
-          autoClose: 1000,
+          autoClose: 1000
         });
       }
 
@@ -85,14 +85,14 @@ const ImageForm = (props) => {
       const obj = {
         preventDefault: () => {},
         target: {
-          name: "arrimagesIndiv",
-          value: arrim,
-        },
+          name: 'arrimagesIndiv',
+          value: arrim
+        }
       };
       props.setUpdate(obj);
 
       return toast.success(`Dato actualizado!`, {
-        autoClose: 1000,
+        autoClose: 1000
       });
     }
     return toast.error(`Error al eliminar imagen por color`);

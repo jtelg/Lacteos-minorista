@@ -1,7 +1,7 @@
-import React, { useRef, useState } from "react";
-import { useEffect } from "react";
-import { ADD_CARD, DELETE_CART } from "../../../redux/actions";
-import { useDispatch } from "react-redux";
+import React, { useRef, useState } from 'react';
+import { useEffect } from 'react';
+import { ADD_CARD, DELETE_CART } from '../../../redux/actions';
+import { useDispatch } from 'react-redux';
 
 const CardPicadas = ({ info, check }) => {
   const dispatch = useDispatch();
@@ -16,10 +16,10 @@ const CardPicadas = ({ info, check }) => {
 
   const changeCount = (e, type) => {
     e.preventDefault();
-    if (personas < 10 && type === "suma") {
+    if (personas < 10 && type === 'suma') {
       setPersonas(personas + 2);
       count.current = count.current + 2;
-    } else if (personas > 2 && type === "resta") {
+    } else if (personas > 2 && type === 'resta') {
       setPersonas(personas - 2);
       count.current = count.current - 2;
     }
@@ -56,14 +56,14 @@ const CardPicadas = ({ info, check }) => {
           <div className="flex flex-col justify-end gap-2">
             <div className="flex items-center w-full gap-3 justify-between rounded-lg overflow-hidden text-lg">
               <button
-                onClick={(e) => changeCount(e, "resta")}
+                onClick={(e) => changeCount(e, 'resta')}
                 className="bg-primary-500 text-white w-[30px] flex items-center justify-center font-extrabold py-1"
               >
                 -
               </button>
               <p>{personas}</p>
               <button
-                onClick={(e) => changeCount(e, "suma")}
+                onClick={(e) => changeCount(e, 'suma')}
                 className="bg-primary-500 text-white w-[30px] flex items-center justify-center font-extrabold py-1"
               >
                 +

@@ -1,4 +1,4 @@
-import { conexionDB } from "../config/db";
+import { conexionDB } from '../config/db';
 
 const ctrlPicadas = {
   PICADAS_ADD: async (req, res, resolve) => {
@@ -19,7 +19,7 @@ const ctrlPicadas = {
       const [result] = await conexionDB.query(sqlIns);
 
       return res.status(200).json({
-        idpicada: result.insertId,
+        idpicada: result.insertId
       });
     } catch (error) {
       console.error(error);
@@ -28,7 +28,7 @@ const ctrlPicadas = {
     }
   },
   PICADAS_GET_LIST: async (req, res, resolve) => {
-    const sql = "CALL SP_get_picadas()";
+    const sql = 'CALL SP_get_picadas()';
     try {
       const [result] = await conexionDB.query(sql);
       if (!result) {
@@ -58,7 +58,7 @@ const ctrlPicadas = {
         for (const color of dataprod.arrcolor) {
           if (color.arrmedidas) {
             color.arrmedidas = JSON.parse(color.arrmedidas);
-            color.medida = color.arrmedidas.map((e) => e.valor).join(", ");
+            color.medida = color.arrmedidas.map((e) => e.valor).join(', ');
           }
         }
       } else {
@@ -92,7 +92,7 @@ const ctrlPicadas = {
     const valor = req.body.valor;
     const sql = `UPDATE picadas SET ${campo} = '${valor}' WHERE idpicada = ${idpicada}`;
     APPLY_GET(sql, res, resolve);
-  },
+  }
 };
 
 const APPLY_GET = async (sql, res, resolve) => {

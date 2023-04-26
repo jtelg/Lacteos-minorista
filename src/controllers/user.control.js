@@ -1,5 +1,5 @@
 // import { getSession } from 'next-auth/react';
-import { conexionDB } from "../config/db";
+import { conexionDB } from '../config/db';
 
 const ctrlUser = {
   VARIABLES_GET: async (_, res, resolve) => {
@@ -40,7 +40,7 @@ const ctrlUser = {
       nombre: result.nombre,
       email: result.email,
       id: result.insertId,
-      role: result.role,
+      role: result.role
     });
   },
   USUARIO_GET_LIST: async (_, res, resolve) => {
@@ -74,7 +74,7 @@ const ctrlUser = {
       res.status(500).end();
       return resolve();
     }
-  },
+  }
 };
 
 export default ctrlUser;

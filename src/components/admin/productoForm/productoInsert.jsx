@@ -1,15 +1,15 @@
-import { useRouter } from "next/router";
-import { useState } from "react";
-import APIConsultas from "../../../services/consultas";
-import ServUsos from "../../../utils/usos";
-import ModalView from "../../utils/modalView";
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import APIConsultas from '../../../services/consultas';
+import ServUsos from '../../../utils/usos';
+import ModalView from '../../utils/modalView';
 
 const ProductoUpdate = (props) => {
   const [formulario, setFormulario] = useState({
-    idpicada: "",
-    ingredientes: "",
-    nombre: "",
-    precioxpers: "",
+    idpicada: '',
+    ingredientes: '',
+    nombre: '',
+    precioxpers: ''
   });
   const router = useRouter();
 
@@ -19,7 +19,7 @@ const ProductoUpdate = (props) => {
 
     setFormulario({
       ...formulario,
-      [name]: value,
+      [name]: value
     });
   };
 
@@ -29,7 +29,7 @@ const ProductoUpdate = (props) => {
     const re = await APIConsultas.picadas.ADD(formulario);
     if (re) {
       router.push(
-        `admin/producto/${ServUsos.convertUrl(formulario.modelo, "convert")}`
+        `admin/producto/${ServUsos.convertUrl(formulario.modelo, 'convert')}`
       );
       closeModal(null);
     }
@@ -37,7 +37,7 @@ const ProductoUpdate = (props) => {
   const closeModal = (ev) => {
     ev?.preventDefault();
     props.close(false);
-    router.push("/admin");
+    router.push('/admin');
   };
   return (
     <>

@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { DELETE_CART } from "../../../../../redux/actions";
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { DELETE_CART } from '../../../../../redux/actions';
 
 const TablaPedidos = ({ pedidos }) => {
   const dispatch = useDispatch();
@@ -35,7 +35,7 @@ const TablaPedidos = ({ pedidos }) => {
               Picada <span className="text-secondary">{pedido.nombre}</span>
             </li>
             <li className="w-[25%] text-center">
-              {pedido.cantidadForm}{" "}
+              {pedido.cantidadForm}{' '}
               <span className="text-secondary">personas </span>
             </li>
             <li className="w-[25%] text-center">$ {pedido.precioxpers} </li>

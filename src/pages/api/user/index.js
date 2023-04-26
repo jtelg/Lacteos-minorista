@@ -1,19 +1,19 @@
-import ctrlUser from "../../../controllers/user.control";
+import ctrlUser from '../../../controllers/user.control';
 
 export default async function handler(req, res) {
   return new Promise((resolve) => {
     switch (req.method) {
-      case "GET":
+      case 'GET':
         switch (req.query.path) {
-          case "VARIABLES_GET":
+          case 'VARIABLES_GET':
             return ctrlUser.VARIABLES_GET(req, res, resolve);
-          case "CATEGSVIEW_GET_COUNT":
+          case 'CATEGSVIEW_GET_COUNT':
             return ctrlUser.CATEGSVIEW_GET_COUNT(req, res, resolve);
-          case "USUARIO_GET_LIST":
+          case 'USUARIO_GET_LIST':
             return ctrlUser.USUARIO_GET_LIST(req, res, resolve);
         }
         break;
-      case "PUT":
+      case 'PUT':
         switch (req.query.path) {
           case `SP_variables_put`:
             return ctrlUser.SP_variables_put(req, res, resolve);

@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import TablaPedidos from "../../components/client/page/shop/carrito/tablaPedidos";
-import { useSelector } from "react-redux";
-import ModalEnviar from "../../components/client/page/shop/carrito/modalEnviar";
-import Head from "next/head";
+import React, { useState, useEffect } from 'react';
+import TablaPedidos from '../../components/client/page/shop/carrito/tablaPedidos';
+import { useSelector } from 'react-redux';
+import ModalEnviar from '../../components/client/page/shop/carrito/modalEnviar';
+import Head from 'next/head';
 
 const Carrito = () => {
   const [pedidos, setPedidos] = useState([]);
@@ -14,7 +14,7 @@ const Carrito = () => {
     setTotal(
       arr_pedidos
         ?.reduce((a, b) => a + b.precioxpers * b.cantidadForm, 0)
-        .toLocaleString("de")
+        .toLocaleString('de')
     );
   }, [arr_pedidos]);
 

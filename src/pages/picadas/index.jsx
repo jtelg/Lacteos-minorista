@@ -1,6 +1,6 @@
-import React from "react";
-import Head from "next/head";
-import ListProducts from "../../components/client/page/shop/listProducts";
+import React from 'react';
+import Head from 'next/head';
+import ListProducts from '../../components/client/page/shop/listProducts';
 
 const Picadas = () => {
   return (

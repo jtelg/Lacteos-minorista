@@ -1,6 +1,5 @@
 import ctrlUser from '../../../controllers/user.control';
 export default async function handler(req, res) {
-
   return new Promise((resolve) => {
     switch (req.method) {
       case 'POST':

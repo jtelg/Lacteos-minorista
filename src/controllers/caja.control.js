@@ -1,4 +1,4 @@
-import { conexionDB } from "../config/db";
+import { conexionDB } from '../config/db';
 
 const ctrlCaja = {
   CAJA_ADD: async (req, res, resolve) => {
@@ -39,7 +39,7 @@ const ctrlCaja = {
     const { arrVentas } = req.body;
     const string = arrVentas
       .map((venta) => `('${idcaja}', '${venta.idventa}')`)
-      .join(",");
+      .join(',');
     const sqlCajaxVenta = `INSERT INTO cajaxventa (idcaja, idventa) VALUES ${string};
   `;
     try {
@@ -127,7 +127,7 @@ const ctrlCaja = {
       res.status(500).end();
       return resolve();
     }
-  },
+  }
 };
 
 export default ctrlCaja;
