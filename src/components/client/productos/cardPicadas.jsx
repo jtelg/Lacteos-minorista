@@ -1,5 +1,4 @@
-import React, { useRef, useState } from 'react';
-import { useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { ADD_CARD, DELETE_CART } from '../../../redux/actions';
 import { useDispatch } from 'react-redux';
 
@@ -40,7 +39,11 @@ const CardPicadas = ({ info, check }) => {
       className={`w-[320px] h-[500px] flex  flex-col bg-[#FAFAFA] rounded-[30px] overflow-hidden hover:shadow-[0_2px_5px_rgba(0,0,0,0.1)] shadow-[0_2px_5px_rgba(0,0,0,30%)]`}
     >
       <div className="w-full h-[50%]">
-        <img src="/media/picada.jpg" className="h-full w-full object-cover" />
+        <img
+          src="/media/picada.jpg"
+          alt="goto"
+          className="h-full w-full object-cover"
+        />
       </div>
       <div className="p-4 w-full flex flex-col justify-between">
         <h1 className="uppercase brother-800 text-[24px]">

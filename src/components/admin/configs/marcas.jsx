@@ -62,6 +62,7 @@ const AccionesJS = (setSub_categ, setCateg) => {
   }, [setSub_categ, subcateg]);
 
   const getData = () => {
+    setRows([]);
     // APIConsultas.marca.TODO(true).then((data) => {
     //   setRows(data?.filter((c) => c.nombre !== 'No definido'));
     // });

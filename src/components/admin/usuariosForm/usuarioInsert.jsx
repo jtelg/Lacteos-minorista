@@ -49,7 +49,7 @@ const UsuarioInsert = ({ open, close, router }) => {
           showConfirmButton: false,
           timer: 1500
         });
-        setActualizar(true);
+        // setActualizar(true);
       }
       closeModal();
     } else {

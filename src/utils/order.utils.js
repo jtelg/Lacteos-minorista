@@ -2,16 +2,16 @@ import APIConsultas from '../services/consultas';
 import ServUsos from './usos';
 import senderFRONT from './whatsapp/senderFront';
 
-const ctrlNumber = (number) => {
-  // si no tiene caracteristicas se las agrega
-  const corte = number.split('549').length === 1;
-  if (corte) number = `549${number}`;
-  return number;
-};
+// const ctrlNumber = (number) => {
+//   // si no tiene caracteristicas se las agrega
+//   const corte = number.split('549').length === 1;
+//   if (corte) number = `549${number}`;
+//   return number;
+// };
 const utilsOrderStatus = {
   orderStatusChange: (venta, data, estado, idestado) => {
     let fecha = '';
-    let msg = '';
+    // let msg = '';
     const objSeguimiento = {
       idventa: venta.idventa,
       name: estado,
@@ -25,10 +25,10 @@ const utilsOrderStatus = {
       // msg = senderFRONT.msgPedidoConfirm(data);
       fecha = `${ServUsos.newDateMysql()}`;
     } else {
-      msg = senderFRONT.msgOrderPendingConfirm(
-        data.split(' ')[1],
-        venta.entrega
-      );
+      // const msg = senderFRONT.msgOrderPendingConfirm(
+      //   data.split(' ')[1],
+      //   venta.entrega
+      // );
       fecha = data;
     }
     const ventaUpd = {

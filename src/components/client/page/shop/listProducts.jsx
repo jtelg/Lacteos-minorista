@@ -14,9 +14,7 @@ const ListProducts = () => {
   }, []);
 
   const checkProduct = (producto) => {
-    return state_carrito?.find((e) => e.idpicada === producto.idpicada)
-      ? true
-      : false;
+    return !!state_carrito?.find((e) => e.idpicada === producto.idpicada);
   };
   return (
     <>
