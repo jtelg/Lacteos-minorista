@@ -1,23 +1,23 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import Swal from "sweetalert2";
-import APIConsultas from "../../../services/consultas";
-import ServUsos from "../../../utils/usos";
-import ModalView from "../../utils/modalView";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import Swal from 'sweetalert2';
+import APIConsultas from '../../../services/consultas';
+import ServUsos from '../../../utils/usos';
+import ModalView from '../../utils/modalView';
 
 export class EgresoInsert extends Component {
   state = {
-    tipo: "Proveedor",
+    tipo: 'Proveedor',
     monto: 0,
-    numFactura: "",
-    descripcion: "",
-    fechaUso: ``,
+    numFactura: '',
+    descripcion: '',
+    fechaUso: ``
   };
 
   tipoEgreso = [
-    { idtipo: "Proveedor", nombre: "Proveedor" },
-    { idtipo: "Cadeteria", nombre: "Cadeteria" },
-    { idtipo: "Retiro", nombre: "Retiro" },
+    { idtipo: 'Proveedor', nombre: 'Proveedor' },
+    { idtipo: 'Cadeteria', nombre: 'Cadeteria' },
+    { idtipo: 'Retiro', nombre: 'Retiro' }
   ];
 
   componentDidMount() {
@@ -33,22 +33,22 @@ export class EgresoInsert extends Component {
   closeModal(ev) {
     ev?.preventDefault();
     this.props.close(false);
-    this.props.router.push("/admin");
+    this.props.router.push('/admin');
   }
 
   async confirmarEgreso(ev) {
     ev.preventDefault();
     Swal.fire({
-      icon: "success",
-      title: "¡Generando EGRESO!",
-      showConfirmButton: false,
+      icon: 'success',
+      title: '¡Generando EGRESO!',
+      showConfirmButton: false
     });
     try {
       await APIConsultas.caja.EGRESO_ADD(this.state);
       this.closeModal();
-      this.props.router.push("/admin");
+      this.props.router.push('/admin');
     } catch (error) {
-      console.error("alta de egreso ", error);
+      console.error('alta de egreso ', error);
     }
     Swal.close();
   }

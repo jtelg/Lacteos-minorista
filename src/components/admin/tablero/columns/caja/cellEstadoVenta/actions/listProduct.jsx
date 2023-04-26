@@ -1,10 +1,10 @@
-import { useEffect, useState, createRef } from "react";
-import { useReactToPrint } from "react-to-print";
-import APIConsultas from "../../../../../../../services/consultas";
+import { useEffect, useState, createRef } from 'react';
+import { useReactToPrint } from 'react-to-print';
+import APIConsultas from '../../../../../../../services/consultas';
 const ListProduct = ({ datosVenta, props }) => {
   const componentRef = createRef();
   const handlePrint = useReactToPrint({
-    content: () => componentRef.current,
+    content: () => componentRef.current
   });
   const [arrProductos, setArrProductos] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -45,7 +45,7 @@ const ListProduct = ({ datosVenta, props }) => {
                       <span className=" justify-end flex font-bold text-[14px]">
                         <b>{prod.cantidad} x</b>
                         <b className="pl-1">
-                          $ {(+prod.precioxpers).toLocaleString("de")}
+                          $ {(+prod.precioxpers).toLocaleString('de')}
                         </b>
                       </span>
                     </div>
@@ -65,10 +65,10 @@ const ListProduct = ({ datosVenta, props }) => {
             <p className="w-full justify-between flex px-2">
               Total pedido:
               <b className="text-green-500">
-                ${" "}
+                ${' '}
                 {arrProductos
                   .reduce((a, b) => a + b.precioxpers * b.cantidad, 0)
-                  .toLocaleString("de")}
+                  .toLocaleString('de')}
               </b>
             </p>
           </div>

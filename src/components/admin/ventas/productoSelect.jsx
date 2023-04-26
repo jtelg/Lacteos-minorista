@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
-import ContadorProd from "../../utils/contadorProd";
+import ContadorProd from '../../utils/contadorProd';
 class ProductoSelect extends React.Component {
   state = {
-    arrProductos: [],
+    arrProductos: []
   };
 
   static getDerivedStateFromProps(props) {
@@ -20,7 +20,7 @@ class ProductoSelect extends React.Component {
   }
 
   totalProd(prod) {
-    return (prod.cantidadForm * prod.precioxpers).toLocaleString("de");
+    return (prod.cantidadForm * prod.precioxpers).toLocaleString('de');
   }
 
   render() {

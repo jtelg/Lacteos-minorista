@@ -1,7 +1,7 @@
-import { useState } from "react";
-import ServUsos from "../../../../../../../../utils/usos";
-import APIConsultas from "../../../../../../../../services/consultas";
-import { useRouter } from "next/router";
+import { useState } from 'react';
+import ServUsos from '../../../../../../../../utils/usos';
+import APIConsultas from '../../../../../../../../services/consultas';
+import { useRouter } from 'next/router';
 
 const Anular = (props) => {
   const [data, setData] = useState(``);
@@ -13,23 +13,23 @@ const Anular = (props) => {
   };
   const confirmar = (e) => {
     e.preventDefault();
-    let dateNowUse = ServUsos.newDateMysql().replace(" ", "T");
+    let dateNowUse = ServUsos.newDateMysql().replace(' ', 'T');
     dateNowUse = dateNowUse.substring(0, dateNowUse.length - 3);
     try {
       const estadoUpd = {
         idventa: props.datosVenta.idventa,
-        campo: "estado",
-        valor: "Anulado",
+        campo: 'estado',
+        valor: 'Anulado'
       };
       const fechaUpd = {
         idventa: props.datosVenta.idventa,
-        campo: "fec_anulado",
-        valor: dateNowUse,
+        campo: 'fec_anulado',
+        valor: dateNowUse
       };
       const porqueUpd = {
         idventa: props.datosVenta.idventa,
-        campo: "anulado_porque",
-        valor: data,
+        campo: 'anulado_porque',
+        valor: data
       };
       APIConsultas.ventas.UPDATE_XCAMPO(estadoUpd, true);
       APIConsultas.ventas.UPDATE_XCAMPO(fechaUpd, true);

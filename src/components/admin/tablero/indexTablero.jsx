@@ -1,19 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import SelectorCategory from "./selector/selector";
+import SelectorCategory from './selector/selector';
 
-import APIConsultas from "../../../services/consultas";
-import SelectorIndexCaja from "./selector/selectorIndexCaja";
+import APIConsultas from '../../../services/consultas';
+import SelectorIndexCaja from './selector/selectorIndexCaja';
 
-import { useRouter } from "next/router";
-import ButtonInsert from "./buttonInsert";
-import selectorColumns from "./selector/columnsSelector";
-import VentaColumnConfig from "./columns/caja/columnsOrder";
-import ProductoColumnConfig from "./columns/productos";
-import UsuarioColumnsConfig from "./columns/usuarios/usuarios";
-import { useDispatch, useSelector } from "react-redux";
-import { RELOAD_TABLERO } from "../../../redux/actions";
-import GridConfig from "./gridConfig";
+import { useRouter } from 'next/router';
+import ButtonInsert from './buttonInsert';
+import selectorColumns from './selector/columnsSelector';
+import VentaColumnConfig from './columns/caja/columnsOrder';
+import ProductoColumnConfig from './columns/productos';
+import UsuarioColumnsConfig from './columns/usuarios/usuarios';
+import { useDispatch, useSelector } from 'react-redux';
+import { RELOAD_TABLERO } from '../../../redux/actions';
+import GridConfig from './gridConfig';
 
 const Tablero = (props) => {
   const dispatch = useDispatch();
@@ -27,10 +27,10 @@ const Tablero = (props) => {
   const [cajaAbierta, setCajaAbierta] = useState(initialCaja);
   const [loadingTablero, setLoadingTablero] = useState(true);
   const [obj_use, setobj_use] = useState({
-    text_use: "",
-    indrow: "",
+    text_use: '',
+    indrow: '',
     ind_use: 0,
-    buttonTitle: "",
+    buttonTitle: ''
   });
   const [indexSelectorCaja, setIndexSelectorCaja] = useState(0);
   const { columns_venta } = VentaColumnConfig();
@@ -40,20 +40,20 @@ const Tablero = (props) => {
     ordenes: columns_venta,
     productos: columns_prods,
     clientes: columns_user,
-    ingresos: columns_venta,
+    ingresos: columns_venta
   };
 
   const selectorCateg = {
     ordenes: selectorColumns.ordenCol,
     productos: selectorColumns.prodCol,
     clientes: selectorColumns.cliCol,
-    ingresos: selectorColumns.ordenCol,
+    ingresos: selectorColumns.ordenCol
   };
   const selectorCaja = {
     ordenes: 0,
     productos: 0,
     clientes: 0,
-    ingresos: 0,
+    ingresos: 0
   };
 
   const fetchArrUseSelector = {
@@ -68,7 +68,7 @@ const Tablero = (props) => {
     },
     ingresos: (idcaja) => {
       return APIConsultas.ventas.GET_ALL(idcaja || 0, true, 0);
-    },
+    }
   };
 
   useEffect(() => {
@@ -107,9 +107,9 @@ const Tablero = (props) => {
     };
 
     if (
-      props.selector === "ingresos" ||
-      props.selector === "ordenes" ||
-      props.selector === "egresos"
+      props.selector === 'ingresos' ||
+      props.selector === 'ordenes' ||
+      props.selector === 'egresos'
     ) {
       fetchDataCaja(props.idcajaURL);
     }
@@ -126,7 +126,7 @@ const Tablero = (props) => {
         setLoadingTablero(false);
         setArr_use(data);
       });
-      window.history.pushState(null, "", "/admin?s=orden&sc=ingreso");
+      window.history.pushState(null, '', '/admin?s=orden&sc=ingreso');
       dispatch(RELOAD_TABLERO(false));
     };
     if (reloadTablero) {

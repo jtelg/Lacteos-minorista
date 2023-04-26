@@ -1,14 +1,14 @@
-import { createRef, useEffect, useState } from "react";
-import { useReactToPrint } from "react-to-print";
-import APIConsultas from "../../../../../../../../services/consultas";
-import utilsOrderStatus from "../../../../../../../../utils/order.utils";
-import ServUsos from "../../../../../../../../utils/usos";
+import { createRef, useEffect, useState } from 'react';
+import { useReactToPrint } from 'react-to-print';
+import APIConsultas from '../../../../../../../../services/consultas';
+import utilsOrderStatus from '../../../../../../../../utils/order.utils';
+import ServUsos from '../../../../../../../../utils/usos';
 
 const OrderPending = (props) => {
   const [dateNow, setDateNow] = useState(``);
   const componentRef = createRef();
   const handlePrint = useReactToPrint({
-    content: () => componentRef.current,
+    content: () => componentRef.current
   });
   const [arrProductos, setArrProductos] = useState([]);
   const [datosVenta, setDatosVenta] = useState({});
@@ -27,7 +27,7 @@ const OrderPending = (props) => {
   }, [props.datosVenta]);
 
   useEffect(() => {
-    let dateNowUse = ServUsos.newDateMysql().split(" ")[1];
+    let dateNowUse = ServUsos.newDateMysql().split(' ')[1];
     dateNowUse = dateNowUse.substring(0, dateNowUse.length - 3);
     // const dateNowUse = new Date();
     setDateNow(dateNowUse);
@@ -42,8 +42,8 @@ const OrderPending = (props) => {
     try {
       utilsOrderStatus.orderStatusChange(
         props.datosVenta,
-        `${new Date().toISOString().split("T")[0]} ${dateNow}`,
-        "confirmado_time",
+        `${new Date().toISOString().split('T')[0]} ${dateNow}`,
+        'confirmado_time',
         2
       );
       setDatosVenta({ ...datosVenta, fecha_tablero: `${dateNow}:00` });
