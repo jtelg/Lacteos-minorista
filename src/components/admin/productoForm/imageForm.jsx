@@ -2,7 +2,6 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import APIConsultas from '../../../services/consultas';
-import ModalList from '../../utils/modalList';
 const ImageForm = (props) => {
   const [arrImgs, setArrImgs] = useState([]);
 

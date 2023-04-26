@@ -30,7 +30,7 @@ const Reducer = (state = initialState, { type, payload }) => {
         carro = [];
       } else {
         carro = state.carrito.filter((d) => {
-          return d.idpicada != payload;
+          return d.idpicada !== payload;
         });
       }
       localStorage.setToStorage('arr_carro', carro);
