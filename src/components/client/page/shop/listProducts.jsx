@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import CardPicadas from "../../productos/cardPicadas";
-import APIConsultas from "../../../../services/consultas";
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import CardPicadas from '../../productos/cardPicadas';
+import APIConsultas from '../../../../services/consultas';
 
 const ListProducts = () => {
   const [arr_picadas, setArr_picadas] = useState([]);

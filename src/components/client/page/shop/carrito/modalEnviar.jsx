@@ -1,26 +1,26 @@
-import React, { useState, useEffect } from "react";
-import Backdrop from "@mui/material/Backdrop";
-import Box from "@mui/material/Box";
-import Modal from "@mui/material/Modal";
-import Fade from "@mui/material/Fade";
-import Typography from "@mui/material/Typography";
-import Swal from "sweetalert2";
-import APIConsultas from "../../../../../services/consultas";
-import { useDispatch, useSelector } from "react-redux";
-import { CARRITO_DELETE_ALL } from "../../../../../redux/actions";
-import { useRouter } from "next/router";
-import senderFRONT from "../../../../../utils/whatsapp/senderFront";
+import React, { useState, useEffect } from 'react';
+import Backdrop from '@mui/material/Backdrop';
+import Box from '@mui/material/Box';
+import Modal from '@mui/material/Modal';
+import Fade from '@mui/material/Fade';
+import Typography from '@mui/material/Typography';
+import Swal from 'sweetalert2';
+import APIConsultas from '../../../../../services/consultas';
+import { useDispatch, useSelector } from 'react-redux';
+import { CARRITO_DELETE_ALL } from '../../../../../redux/actions';
+import { useRouter } from 'next/router';
+import senderFRONT from '../../../../../utils/whatsapp/senderFront';
 
 const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
   width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
   boxShadow: 24,
-  p: 4,
+  p: 4
 };
 
 const ModalEnviar = ({ pedidos }) => {
@@ -30,9 +30,9 @@ const ModalEnviar = ({ pedidos }) => {
 
   const [open, setOpen] = useState(false);
   const [formulario, setFormulario] = useState({
-    nombre: "",
-    email: "",
-    telefono: "",
+    nombre: '',
+    email: '',
+    telefono: ''
   });
 
   const handleOpen = () => setOpen(true);
@@ -47,25 +47,25 @@ const ModalEnviar = ({ pedidos }) => {
     const total = pedidos.reduce((a, b) => a + b.precioxpers * b.personas, 0);
     const venta = {
       iduser: 0,
-      CP: "5900",
+      CP: '5900',
       destino_calle: null,
       destino_nro: null,
       destino_dpto: null,
       destino_barrio: null,
       destino_ciudad: null,
       tel_form: formulario.telefono,
-      tipo_alta: "Web",
-      entrega: "Retira",
+      tipo_alta: 'Web',
+      entrega: 'Retira',
       otra_persona: 0,
       retira_nombre: formulario.nombre,
       retira_apellido: null,
       montototal: total,
-      tipo_pago: "Efectivo",
+      tipo_pago: 'Efectivo',
       seguimiento_idestado: 1,
-      comentario: "",
-      estado: "Pendiente",
+      comentario: '',
+      estado: 'Pendiente',
       anulado_porque: null,
-      fec_anulado: null,
+      fec_anulado: null
     };
     return venta;
   };
@@ -74,9 +74,9 @@ const ModalEnviar = ({ pedidos }) => {
     if (formulario.nombre && formulario.email) {
       try {
         Swal.fire({
-          icon: "success",
-          title: "¡Realizando Compra!",
-          showConfirmButton: false,
+          icon: 'success',
+          title: '¡Realizando Compra!',
+          showConfirmButton: false
         });
         const obj = venta_add();
         const re = await APIConsultas.ventas.VENTAS_ADD(obj, pedidos);
@@ -89,12 +89,12 @@ const ModalEnviar = ({ pedidos }) => {
         dispatch(CARRITO_DELETE_ALL());
         Swal.close();
         handleClose();
-        router.push("/picadas");
+        router.push('/picadas');
       } catch (error) {
-        console.error("alta de venta ", error);
+        console.error('alta de venta ', error);
       }
     } else {
-      Swal.fire("Revisar datos obligatorios!");
+      Swal.fire('Revisar datos obligatorios!');
     }
   };
   return (
@@ -108,7 +108,7 @@ const ModalEnviar = ({ pedidos }) => {
         </button>
       ) : (
         <button
-          onClick={() => router.push("/picadas")}
+          onClick={() => router.push('/picadas')}
           className="bg-primary-500 text-white px-4 py-2 text-xl brother-500   rounded-lg hover:shadow-[0_2px_5px_rgba(0,0,0,0.1)] shadow-[0_2px_5px_rgba(0,0,0,30%)] "
         >
           Comenzar a comprar
@@ -124,8 +124,8 @@ const ModalEnviar = ({ pedidos }) => {
         className="rounded-lg z-[1]"
         slotProps={{
           backdrop: {
-            timeout: 500,
-          },
+            timeout: 500
+          }
         }}
       >
         <Fade in={open}>

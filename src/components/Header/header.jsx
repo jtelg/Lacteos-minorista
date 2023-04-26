@@ -1,8 +1,8 @@
-import React from "react";
-import Link from "next/link";
-import Desktop from "./desktop";
-import Mobile from "./mobile";
-import { useSelector } from "react-redux";
+import React from 'react';
+import Link from 'next/link';
+import Desktop from './desktop';
+import Mobile from './mobile';
+import { useSelector } from 'react-redux';
 
 const Header = () => {
   const state_carrito = useSelector((state) => state.carrito);

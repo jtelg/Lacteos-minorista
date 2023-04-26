@@ -1,20 +1,20 @@
-import { useEffect, useState } from "react";
-import APIConsultas from "../../../services/consultas";
-import { toast } from "react-toastify";
-import Modal from "@mui/material/Modal";
-import Box from "@mui/material/Box";
-import { DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
+import { useEffect, useState } from 'react';
+import APIConsultas from '../../../services/consultas';
+import { toast } from 'react-toastify';
+import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
+import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
 
 const style = {
-  position: "absolute",
-  top: "50%",
-  left: "55%",
-  transform: "translate(-50%, -50%)",
+  position: 'absolute',
+  top: '50%',
+  left: '55%',
+  transform: 'translate(-50%, -50%)',
   width: 350,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
   boxShadow: 24,
-  p: 4,
+  p: 4
 };
 
 const Accionesfull = (sub_categ, categ) => {
@@ -22,33 +22,33 @@ const Accionesfull = (sub_categ, categ) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [rows, setRows] = useState([]);
-  const [name, setName] = useState("");
+  const [name, setName] = useState('');
   const columns = [
-    { field: "idsubc", headerName: "ID", width: 100 },
+    { field: 'idsubc', headerName: 'ID', width: 100 },
     {
-      field: "nombre",
-      headerName: "Nombre",
+      field: 'nombre',
+      headerName: 'Nombre',
       width: 250,
-      editable: true,
+      editable: true
     },
     {
-      headerName: "Actions",
-      field: "actions",
+      headerName: 'Actions',
+      field: 'actions',
       width: 100,
-      type: "actions",
+      type: 'actions',
       getActions: (params) => [
         <GridActionsCellItem
           key={2}
           label="Eliminar articulo"
-          onClick={(e) => onClickAction(e, "delete", params)}
+          onClick={(e) => onClickAction(e, 'delete', params)}
           icon={
             <span className="material-icons-outlined text-red-600">
               delete_forever
             </span>
           }
-        />,
-      ],
-    },
+        />
+      ]
+    }
   ];
   useEffect(() => {
     setRows(sub_categ);
@@ -56,12 +56,12 @@ const Accionesfull = (sub_categ, categ) => {
   const getData = async () => {
     const subCategs = (
       await APIConsultas.subCategorias.GET_XID(categ.idcateg, true)
-    ).filter((c) => c.nombre !== "No definido");
+    ).filter((c) => c.nombre !== 'No definido');
     setRows(subCategs);
   };
   const onClickAction = async (e, ind, params) => {
     e.stopPropagation(); // don't select this row after clicking
-    if (ind === "delete") {
+    if (ind === 'delete') {
       const res = await APIConsultas.subCategorias.DELETE(params.id);
       if (res) {
         getData();
@@ -102,7 +102,7 @@ const Accionesfull = (sub_categ, categ) => {
     columns,
     name,
     setName,
-    setRows,
+    setRows
   };
 };
 
@@ -116,7 +116,7 @@ const SubCategorias = ({ sub_categ, categ }) => {
     open,
     columns,
     name,
-    setName,
+    setName
   } = Accionesfull(sub_categ, categ);
 
   return (

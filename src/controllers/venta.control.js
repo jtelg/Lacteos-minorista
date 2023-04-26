@@ -1,5 +1,5 @@
-import { conexionDB } from "../config/db";
-import APIConsultas from "../services/consultas";
+import { conexionDB } from '../config/db';
+import APIConsultas from '../services/consultas';
 const ctrlVenta = {
   VENTA_ADD: async (req, res, resolve) => {
     await conexionDB.query("SET time_zone = '-03:00';");
@@ -51,7 +51,7 @@ const ctrlVenta = {
             NOW(),
             '${req.body.venta.comentario}'
             );`;
-    let idventa = "";
+    let idventa = '';
     try {
       const [result] = await conexionDB.query(sql);
       idventa = result.insertId;
@@ -71,10 +71,10 @@ const ctrlVenta = {
     }
   },
   ARTXVENTA_ADD: async (req, res, resolve, idventa, idestadoSeg) => {
-    let string = "";
+    let string = '';
     req.body.arrProd.forEach((prod) => {
       string += `('${idventa}', '${prod.idpicada}', '${null}', '${null}',
-       '0', '${prod.cantidadForm}', '${prod.comentario || ""}'),`;
+       '0', '${prod.cantidadForm}', '${prod.comentario || ''}'),`;
     });
     string = string.substring(0, string.length - 1);
 
@@ -117,7 +117,7 @@ const ctrlVenta = {
       res.write(JSON.stringify(data));
       res.end();
     } catch (error) {
-      console.error("error", error);
+      console.error('error', error);
       res.status(500).end();
       return resolve();
     }
@@ -195,6 +195,6 @@ const ctrlVenta = {
       res.status(500).end();
       return resolve();
     }
-  },
+  }
 };
 export default ctrlVenta;

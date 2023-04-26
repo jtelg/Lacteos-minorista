@@ -1,4 +1,4 @@
-import ServUsos from "../usos";
+import ServUsos from '../usos';
 const functions = {
   EnviaPedido_msg: (idventa, entrega, arr_cartprods) => {
     const pedido = `_¡Hola! Te hago el siguiente pedido:_ %0A
@@ -13,19 +13,19 @@ const functions = {
                (d) =>
                  `${d.personas} x ${d.nombre}: $ ${(
                    d.personas * d.precioxpers
-                 ).toLocaleString("de")} %0A`
+                 ).toLocaleString('de')} %0A`
              )
              .flat()
-             .join("")}
+             .join('')}
            %0A*TOTAL: $${arr_cartprods
              .reduce((a, b) => a + b.precioxpers * b.personas, 0)
-             .toLocaleString("de")}*
+             .toLocaleString('de')}*
           
            %0A
            %0A_Espero tu respuesta para confirmar mi pedido_
            `;
     return pedido;
-  },
+  }
 };
 
 const senderFRONT = {
@@ -35,16 +35,16 @@ const senderFRONT = {
   },
   msgOrderPendingConfirm: (hora, entrega) => {
     const msg = `¡¡Tu pedido está confirmado!! 🤩 Va a estar listo a las ${hora}hs. ${
-      entrega === "Envio a domicilio"
-        ? "A partir de ese momento depende de la demora del cadete 🛵😊"
-        : ""
+      entrega === 'Envio a domicilio'
+        ? 'A partir de ese momento depende de la demora del cadete 🛵😊'
+        : ''
     }`;
     return msg;
   },
-  msgPedidoConfirm: (comentario = "") => {
+  msgPedidoConfirm: (comentario = '') => {
     return `¡¡Tu pedido está en camino!! 🛵
     ${comentario}`;
-  },
+  }
 };
 
 export default senderFRONT;

@@ -136,7 +136,7 @@ const Tablero = (props) => {
   }, [reloadTablero]);
 
   const controlAgregaNuevo = () => {
-    let bndReturn = true;
+    const bndReturn = true;
     return bndReturn;
   };
   return (

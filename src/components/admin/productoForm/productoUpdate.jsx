@@ -1,29 +1,29 @@
-import { useState, useEffect } from "react";
-import { toast } from "react-toastify";
-import APIConsultas from "../../../services/consultas";
-import ImageForm from "./imageForm";
-import { useRouter } from "next/router";
-import Head from "next/head";
+import { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
+import APIConsultas from '../../../services/consultas';
+import ImageForm from './imageForm';
+import { useRouter } from 'next/router';
+import Head from 'next/head';
 const ProductoUpdate = (props) => {
   const [formulario, setFormulario] = useState({
-    idpicada: "",
-    ingredientes: "",
-    nombre: "",
-    precioxpers: "",
-    visible: "",
+    idpicada: '',
+    ingredientes: '',
+    nombre: '',
+    precioxpers: '',
+    visible: '',
     arrimagesIndiv: [],
     arrmedidasIndiv: [],
-    arrcolor: [],
+    arrcolor: []
   });
   const [timer, setTimer] = useState(null);
-  const [titlePage, setTitlePage] = useState("");
+  const [titlePage, setTitlePage] = useState('');
   const router = useRouter();
   useEffect(() => {
     setTitlePage(`${formulario.nombre} | ${props.appName}`);
   }, [formulario.nombre, props.appName]);
   useEffect(() => {
     APIConsultas.picadas.GET_XID(props.idPage, true).then((data_prod) => {
-      if (!data_prod) return router.push("/admin");
+      if (!data_prod) return router.push('/admin');
       setFormulario({
         idpicada: data_prod.idpicada,
         ingredientes: data_prod.ingredientes,
@@ -32,7 +32,7 @@ const ProductoUpdate = (props) => {
         visible: data_prod.visible,
         arrimagesIndiv: [],
         arrmedidasIndiv: data_prod.arrmedidasIndiv,
-        arrcolor: data_prod.arrcolor,
+        arrcolor: data_prod.arrcolor
       });
       APIConsultas.Images.SET_IMAGE(data_prod).then((imgs) => {
         setFormulario((form) => ({ ...form, arrimagesIndiv: imgs }));
@@ -44,14 +44,14 @@ const ProductoUpdate = (props) => {
     ev?.preventDefault();
     let prods = [];
     updateData(name, value);
-    if (name === "typeCatalog") {
+    if (name === 'typeCatalog') {
       switch (value) {
         case 0:
           setFormulario({
             ...formulario,
             arrimagesIndiv: await APIConsultas.Images.SET_IMAGE(formulario),
             [name]: value,
-            visible: ctrlVisible(name, value),
+            visible: ctrlVisible(name, value)
           });
           break;
         case 1:
@@ -59,7 +59,7 @@ const ProductoUpdate = (props) => {
           setFormulario({
             ...prods,
             [name]: value,
-            visible: ctrlVisible(name, value),
+            visible: ctrlVisible(name, value)
           });
           break;
       }
@@ -67,25 +67,25 @@ const ProductoUpdate = (props) => {
   };
   const onChange = (e) => {
     e.preventDefault();
-    if (e.target.name !== "visible") {
+    if (e.target.name !== 'visible') {
       setFormulario({
         ...formulario,
         [e.target.name]: e.target.value,
-        visible: ctrlVisible(e.target.name, e.target.value),
+        visible: ctrlVisible(e.target.name, e.target.value)
       });
     } else {
       let val = e.target.value;
       if (val === 0) val = ctrlVisible(e.target.name, e.target.value);
       setFormulario({
         ...formulario,
-        visible: val,
+        visible: val
       });
     }
 
     if (
-      e.target.name !== "arrcolor" &&
-      e.target.name !== "arrmedidasIndiv" &&
-      e.target.name !== "arrimagesIndiv"
+      e.target.name !== 'arrcolor' &&
+      e.target.name !== 'arrmedidasIndiv' &&
+      e.target.name !== 'arrimagesIndiv'
     ) {
       updateData(e.target.name, e.target.value);
     }
@@ -100,10 +100,10 @@ const ProductoUpdate = (props) => {
           valor
         );
         if (res) {
-          if (campo !== "visible") {
-            updateData("visible", ctrlVisible(campo, valor));
+          if (campo !== 'visible') {
+            updateData('visible', ctrlVisible(campo, valor));
             return toast.success(`Dato actualizado!`, {
-              autoClose: 1000,
+              autoClose: 1000
             });
           }
           return;
@@ -115,10 +115,10 @@ const ProductoUpdate = (props) => {
 
   const infoUser = (ev, key, value) => {
     ev.preventDefault();
-    let msg = "";
+    let msg = '';
     let visible = 1;
     switch (key) {
-      case "typeCatalog":
+      case 'typeCatalog':
         if (value === 0) {
           msg = `Podrá cargar infintas imagenes,
           como asi tambien, seleccionar entre las medidas cargadas
@@ -128,14 +128,14 @@ const ProductoUpdate = (props) => {
           cargar imagenes y seleccionar medidas para luego mostrar en el catalogo`;
         }
         break;
-      case "prodVisible":
+      case 'prodVisible':
         visible = formulario.visible === 1 ? 0 : 1;
-        if (ctrlVisible("visible", visible) === 1) {
+        if (ctrlVisible('visible', visible) === 1) {
           setFormulario({
             ...formulario,
-            visible,
+            visible
           });
-          setValue(ev, "visible", visible);
+          setValue(ev, 'visible', visible);
           return;
         }
         msg = `Para poner el producto visible debe completar todos los datos obligatorios.`;
@@ -148,17 +148,17 @@ const ProductoUpdate = (props) => {
     let ocultar = 1;
 
     if (
-      campo === "categ" ||
-      campo === "subc" ||
-      campo === "marca" ||
-      campo === "modelo" ||
-      campo === "moneda" ||
-      campo === "precioventa"
+      campo === 'categ' ||
+      campo === 'subc' ||
+      campo === 'marca' ||
+      campo === 'modelo' ||
+      campo === 'moneda' ||
+      campo === 'precioventa'
     ) {
       if (+valor <= 0 || valor.length === 0) {
         ocultar = 0;
       }
-    } else if (campo === "typeCatalog") {
+    } else if (campo === 'typeCatalog') {
       if (valor === 1) {
         formulario.arrcolor?.forEach((c) => {
           if (
@@ -191,8 +191,8 @@ const ProductoUpdate = (props) => {
     ) {
       ocultar = 0;
     }
-    if (campo !== "typeCatalog") {
-      const arr = campo === "arrcolor" ? valor : formulario.arrcolor;
+    if (campo !== 'typeCatalog') {
+      const arr = campo === 'arrcolor' ? valor : formulario.arrcolor;
       if (formulario.typeCatalog === 1) {
         arr.forEach((c) => {
           if (
@@ -207,7 +207,7 @@ const ProductoUpdate = (props) => {
           ocultar = 0;
         }
       } else if (formulario.typeCatalog === 0) {
-        if (campo !== "arrmedidasIndiv" && campo !== "arrimagesIndiv") {
+        if (campo !== 'arrmedidasIndiv' && campo !== 'arrimagesIndiv') {
           if (
             (!formulario.arrmedidasIndiv ||
               formulario.arrmedidasIndiv.length === 0) &&
@@ -224,11 +224,11 @@ const ProductoUpdate = (props) => {
       }
     }
     if (
-      campo === "arrcolor" ||
-      campo === "arrmedidasIndiv" ||
-      campo === "arrimagesIndiv"
+      campo === 'arrcolor' ||
+      campo === 'arrmedidasIndiv' ||
+      campo === 'arrimagesIndiv'
     ) {
-      updateData("visible", ocultar);
+      updateData('visible', ocultar);
     }
 
     return ocultar;
@@ -330,7 +330,7 @@ const ProductoUpdate = (props) => {
                               w-full shadow transition-all border-2 border-primary-500 bg-primary-500 text-white}`}
                   >
                     <span
-                      onClick={(ev) => setValue(ev, "typeCatalog", 0)}
+                      onClick={(ev) => setValue(ev, 'typeCatalog', 0)}
                       aria-hidden
                       className="h-full w-full flex items-center justify-center cursor-pointer text-white"
                     >
@@ -338,7 +338,7 @@ const ProductoUpdate = (props) => {
                     </span>
                     <span
                       aria-hidden
-                      onClick={(ev) => infoUser(ev, "typeCatalog", 0)}
+                      onClick={(ev) => infoUser(ev, 'typeCatalog', 0)}
                       className="material-icons-outlined cursor-pointer text-white"
                       title="Clickea y mira la informacion!"
                     >
@@ -363,10 +363,10 @@ const ProductoUpdate = (props) => {
                    md:text-sm flex items-center justify-between gap-4
                    w-full shadow ${
                      formulario.visible === 1
-                       ? "bg-green-500 text-white"
-                       : "bg-red-400 text-white"
+                       ? 'bg-green-500 text-white'
+                       : 'bg-red-400 text-white'
                    }`}
-                onClick={(ev) => infoUser(ev, "prodVisible", 1)}
+                onClick={(ev) => infoUser(ev, 'prodVisible', 1)}
                 aria-hidden
               >
                 <div

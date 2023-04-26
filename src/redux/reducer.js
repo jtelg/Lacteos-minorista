@@ -1,7 +1,7 @@
-import localStorage from "../utils/localstorage";
+import localStorage from '../utils/localstorage';
 
 const initialState = {
-  carrito: [],
+  carrito: []
 };
 let index_exist = -1;
 
@@ -9,7 +9,7 @@ const Reducer = (state = initialState, { type, payload }) => {
   let carro = [];
 
   switch (type) {
-    case "ADD_CARD":
+    case 'ADD_CARD':
       if (state.carrito) {
         index_exist = state.carrito.findIndex((d) => {
           return d.idpicada === payload.idpicada;
@@ -20,12 +20,12 @@ const Reducer = (state = initialState, { type, payload }) => {
       } else {
         carro = [...(state.carrito ? state.carrito : []), payload];
       }
-      localStorage.setToStorage("arr_carro", carro);
+      localStorage.setToStorage('arr_carro', carro);
       return {
         ...state,
-        carrito: carro,
+        carrito: carro
       };
-    case "DELETE_CART":
+    case 'DELETE_CART':
       if (payload.length < 1) {
         carro = [];
       } else {
@@ -33,42 +33,42 @@ const Reducer = (state = initialState, { type, payload }) => {
           return d.idpicada != payload;
         });
       }
-      localStorage.setToStorage("arr_carro", carro);
+      localStorage.setToStorage('arr_carro', carro);
       return {
         ...state,
-        carrito: carro,
+        carrito: carro
       };
-    case "CARRITO_DELETE_ALL":
-      localStorage.setToStorage("arr_carro", []);
+    case 'CARRITO_DELETE_ALL':
+      localStorage.setToStorage('arr_carro', []);
       return {
         ...state,
-        carrito: [],
+        carrito: []
       };
-    case "GLOBAL_VARS":
+    case 'GLOBAL_VARS':
       return {
         ...state,
-        globalVars: payload,
+        globalVars: payload
       };
-    case "SESSION_SET":
-      localStorage.setToStorage("session", payload);
+    case 'SESSION_SET':
+      localStorage.setToStorage('session', payload);
       return {
         ...state,
-        session: payload,
+        session: payload
       };
-    case "ARR_NAV":
+    case 'ARR_NAV':
       return {
         ...state,
-        arr_nav: payload,
+        arr_nav: payload
       };
-    case "RELOAD_TABLERO":
+    case 'RELOAD_TABLERO':
       return {
         ...state,
-        reloadTablero: payload,
+        reloadTablero: payload
       };
-    case "RELOAD_CAJA":
+    case 'RELOAD_CAJA':
       return {
         ...state,
-        reloadCaja: payload,
+        reloadCaja: payload
       };
     default:
       return state;

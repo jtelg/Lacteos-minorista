@@ -1,8 +1,8 @@
-import Head from "next/head";
-import { useRouter } from "next/router";
-import { useDispatch } from "react-redux";
-import { SESSION_SET } from "../../redux/actions";
-import APIConsultas from "../../services/consultas";
+import Head from 'next/head';
+import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
+import { SESSION_SET } from '../../redux/actions';
+import APIConsultas from '../../services/consultas';
 
 export default function Login() {
   const router = useRouter();
@@ -10,14 +10,14 @@ export default function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    const user = document.getElementById("usuario").value;
-    const password = document.getElementById("password").value;
+    const user = document.getElementById('usuario').value;
+    const password = document.getElementById('password').value;
     const userRE = await APIConsultas.usuario.session(user, password, true);
     if (userRE) {
       dispatch(SESSION_SET(userRE));
       return router.push(`/carrito`);
     }
-    alert("Usuario o contraseña incorrectos");
+    alert('Usuario o contraseña incorrectos');
   };
   return (
     <>

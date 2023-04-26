@@ -1,12 +1,12 @@
-import Head from "next/head";
-import { useEffect } from "react";
-import { useRouter } from "next/router";
-import HomePage from "../components/client/page/home";
+import Head from 'next/head';
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import HomePage from '../components/client/page/home';
 
 export default function Home() {
   const router = useRouter();
   useEffect(() => {
-    router.push("/picadas");
+    router.push('/picadas');
   }, []);
 
   return (

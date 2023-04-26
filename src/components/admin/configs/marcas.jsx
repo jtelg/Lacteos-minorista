@@ -1,20 +1,20 @@
-import { useEffect, useState } from "react";
-import APIConsultas from "../../../services/consultas";
-import { toast } from "react-toastify";
-import Modal from "@mui/material/Modal";
-import Box from "@mui/material/Box";
-import { DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
+import { useEffect, useState } from 'react';
+import APIConsultas from '../../../services/consultas';
+import { toast } from 'react-toastify';
+import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
+import { DataGrid, GridActionsCellItem } from '@mui/x-data-grid';
 
 const style = {
-  position: "absolute",
-  top: "50%",
-  left: "55%",
-  transform: "translate(-50%, -50%)",
+  position: 'absolute',
+  top: '50%',
+  left: '55%',
+  transform: 'translate(-50%, -50%)',
   width: 350,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
   boxShadow: 24,
-  p: 4,
+  p: 4
 };
 
 const AccionesJS = (setSub_categ, setCateg) => {
@@ -23,34 +23,34 @@ const AccionesJS = (setSub_categ, setCateg) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [rows, setRows] = useState([]);
-  const [name, setName] = useState("");
+  const [name, setName] = useState('');
   const [subcateg, setSubcateg] = useState([]);
   const columns = [
-    { field: "idmarca", headerName: "ID", flex: 0.5 },
+    { field: 'idmarca', headerName: 'ID', flex: 0.5 },
     {
-      field: "nombre",
-      headerName: "Nombre",
+      field: 'nombre',
+      headerName: 'Nombre',
       flex: 1,
-      editable: true,
+      editable: true
     },
     {
-      headerName: "Actions",
-      field: "actions",
+      headerName: 'Actions',
+      field: 'actions',
       flex: 0.5,
-      type: "actions",
+      type: 'actions',
       getActions: (params) => [
         <GridActionsCellItem
           key={2}
           label="Eliminar articulo"
-          onClick={(e) => onClickAction(e, "delete", params)}
+          onClick={(e) => onClickAction(e, 'delete', params)}
           icon={
             <span className="material-icons-outlined text-red-600 text-2xl">
               delete_forever
             </span>
           }
-        />,
-      ],
-    },
+        />
+      ]
+    }
   ];
 
   useEffect(() => {
@@ -69,7 +69,7 @@ const AccionesJS = (setSub_categ, setCateg) => {
 
   const onClickAction = async (e, ind, params) => {
     e.stopPropagation(); // don't select this row after clicking
-    if (ind === "delete") {
+    if (ind === 'delete') {
       const res = await APIConsultas.marca.DELETE(params.id);
       if (res) {
         getData();
@@ -77,7 +77,7 @@ const AccionesJS = (setSub_categ, setCateg) => {
       } else {
         return toast.error(`Error al eliminar el campo.`);
       }
-    } else if (ind === "subcateg") {
+    } else if (ind === 'subcateg') {
       const res = await APIConsultas.marca.SUBCATEG_GET_XID(params.id, true);
       setCateg(params.row);
       setSubcateg(res);
@@ -114,7 +114,7 @@ const AccionesJS = (setSub_categ, setCateg) => {
     columns,
     name,
     setName,
-    subcateg,
+    subcateg
   };
 };
 
@@ -128,7 +128,7 @@ const Marcas = ({ setSub_categ, setCateg }) => {
     open,
     columns,
     name,
-    setName,
+    setName
   } = AccionesJS(setSub_categ, setCateg);
 
   return (
