@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
-import ProductoColumnConfig from "../columns/productos";
-import { useRouter } from "next/router";
-import selectorColumns from "./columnsSelector";
+import { useEffect, useState } from 'react';
+import ProductoColumnConfig from '../columns/productos';
+import { useRouter } from 'next/router';
+import selectorColumns from './columnsSelector';
 
 const objCategs = [
   selectorColumns.ordenCol,
   selectorColumns.prodCol,
   selectorColumns.cliCol,
-  selectorColumns.configCol,
+  selectorColumns.configCol
 ];
 const SelectorCategory = (props) => {
   const router = useRouter();
@@ -16,7 +16,7 @@ const SelectorCategory = (props) => {
   const { dataChange } = ProductoColumnConfig(router);
 
   useEffect(() => {
-    fetch("/api/user?path=CATEGSVIEW_GET_COUNT")
+    fetch('/api/user?path=CATEGSVIEW_GET_COUNT')
       .then((res) => res.json())
       .then((res) => {
         const obj = objCategs;
@@ -40,7 +40,7 @@ const SelectorCategory = (props) => {
     if (categ.ind_use === 3) {
       return router.push(`/admin/configuracion`);
     }
-    const selectorcaja = categ.ind_use === 0 ? `&sc=ingresos` : "";
+    const selectorcaja = categ.ind_use === 0 ? `&sc=ingresos` : '';
     return router.push(`/admin?s=${categ.text_use}${selectorcaja}`);
   };
   return (
@@ -58,7 +58,7 @@ const SelectorCategory = (props) => {
             >
               <button
                 className={`${
-                  props.obj_use.ind_use === index && "border-2 bg-primary-500"
+                  props.obj_use.ind_use === index && 'border-2 bg-primary-500'
                 } border-2 transition-all border-primary-500 h-full flex items-center px-[1rem] shadow-sm rounded-[1rem] cursor-pointer`}
                 onClick={() => selector(categ)}
                 disabled={loading}
@@ -66,8 +66,8 @@ const SelectorCategory = (props) => {
                 <div
                   className={`h-12 w-12 flex items-center justify-center rounded-full ${
                     props.obj_use.ind_use === index
-                      ? "text-white"
-                      : "bg-white text-primary-500 "
+                      ? 'text-white'
+                      : 'bg-white text-primary-500 '
                   }`}
                 >
                   <span className="material-icons text-3xl">{categ.icon}</span>
@@ -79,8 +79,8 @@ const SelectorCategory = (props) => {
                         props.obj_use.ind_use === index ||
                         categ.ind_use === 4 ||
                         index === categs_muestra.length - 1
-                          ? "text-white"
-                          : "text-primary-500"
+                          ? 'text-white'
+                          : 'text-primary-500'
                       }`}
                     >
                       {categ.text_use}
@@ -92,8 +92,8 @@ const SelectorCategory = (props) => {
                         <h4
                           className={`text-[15px] font-bold ${
                             props.obj_use.ind_use === index
-                              ? "text-white "
-                              : "text-primary-500"
+                              ? 'text-white '
+                              : 'text-primary-500'
                           } `}
                         >
                           {categ.count}

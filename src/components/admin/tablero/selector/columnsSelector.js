@@ -1,60 +1,60 @@
 const ordenCol = {
-  descrip: "Lista de ordenes por clientes finales.",
-  buttonTitle: "Nueva Orden",
-  icon: "sell",
+  descrip: 'Lista de ordenes por clientes finales.',
+  buttonTitle: 'Nueva Orden',
+  icon: 'sell',
   count: 0,
-  color: "green",
-  text_use: "ordenes",
-  indrow: "idventa",
+  color: 'green',
+  text_use: 'ordenes',
+  indrow: 'idventa',
   ind_use: 0,
-  path: "",
+  path: ''
 };
 const prodCol = {
   descrip:
-    "Lista de todos los productos cargados listos para mostrar en el catalogo.",
-  buttonTitle: "Nueva Picada",
-  icon: "inventory_2",
+    'Lista de todos los productos cargados listos para mostrar en el catalogo.',
+  buttonTitle: 'Nueva Picada',
+  icon: 'inventory_2',
   count: 0,
-  color: "primary",
-  text_use: "productos",
-  indrow: "idart",
-  ind_use: 1,
+  color: 'primary',
+  text_use: 'productos',
+  indrow: 'idart',
+  ind_use: 1
   // path: `/api/producto?path=PRODUCTO_GET_LIST&offset=0&limit=100&idcateg=0&idsubc=0&muestratodo=true`
 };
 const cliCol = {
   descrip:
-    "En esta lista encontrará todos los clientes que realizaron alguna compra.",
-  buttonTitle: "Nuevo Cliente",
-  icon: "group",
+    'En esta lista encontrará todos los clientes que realizaron alguna compra.',
+  buttonTitle: 'Nuevo Cliente',
+  icon: 'group',
   count: 0,
-  color: "indigo",
-  text_use: "clientes",
-  indrow: "iduser",
+  color: 'indigo',
+  text_use: 'clientes',
+  indrow: 'iduser',
   ind_use: 2,
-  path: `/api/user?path=USUARIO_GET_LIST`,
+  path: `/api/user?path=USUARIO_GET_LIST`
 };
 const configCol = {
-  titulo: "",
-  descrip: "",
-  icon: "settings",
-  count: "",
-  color: "indigo",
-  text_use: "",
-  indrow: "",
+  titulo: '',
+  descrip: '',
+  icon: 'settings',
+  count: '',
+  color: 'indigo',
+  text_use: '',
+  indrow: '',
   ind_use: 3,
-  path: `/admin/configuracion`,
+  path: `/admin/configuracion`
 };
 
 const egresoCol = {
-  descrip: "En esta lista encontrara todos los egresos registrados en caja",
-  buttonTitle: "Nueva Orden",
-  icon: "sell",
+  descrip: 'En esta lista encontrara todos los egresos registrados en caja',
+  buttonTitle: 'Nueva Orden',
+  icon: 'sell',
   count: 0,
-  color: "green",
-  text_use: "ordenes",
-  indrow: "idegreso",
+  color: 'green',
+  text_use: 'ordenes',
+  indrow: 'idegreso',
   ind_use: 0,
-  path: "",
+  path: ''
 };
 
 const selectorColumns = { configCol, cliCol, prodCol, ordenCol, egresoCol };

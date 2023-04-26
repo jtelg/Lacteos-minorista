@@ -1,43 +1,43 @@
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import APIConsultas from "../../../services/consultas";
-import ModalView from "../../utils/modalView";
-import { useSelector } from "react-redux";
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import APIConsultas from '../../../services/consultas';
+import ModalView from '../../utils/modalView';
+import { useSelector } from 'react-redux';
 // import ServUsos from '../../../utils/usos.utils';
-import SearchProducto from "../../client/utils/searchProducto";
-import ProductoSelect from "./productoSelect";
+import SearchProducto from '../../client/utils/searchProducto';
+import ProductoSelect from './productoSelect';
 
 const tipoPago = [
-  { idtipo: 1, nombre: "Efectivo" },
-  { idtipo: 2, nombre: "Transferencia" },
-  { idtipo: 3, nombre: "Tarjeta" },
+  { idtipo: 1, nombre: 'Efectivo' },
+  { idtipo: 2, nombre: 'Transferencia' },
+  { idtipo: 3, nombre: 'Tarjeta' }
 ];
 const tipoEntrega = [
-  { idtipo: "1", nombre: "Retiro del local" },
-  { idtipo: "2", nombre: "Envio a domicilio" },
+  { idtipo: '1', nombre: 'Retiro del local' },
+  { idtipo: '2', nombre: 'Envio a domicilio' }
 ];
 
 const VentaInsert = (props) => {
   const [productos, setProductos] = useState([]);
   const globalVars = useSelector((s) => s.globalVars);
   const [userVars, setUserVars] = useState({
-    direccion: "",
-    telefono: "",
+    direccion: '',
+    telefono: ''
   });
 
   const [tipoSelect, setTipoSelect] = useState({
     pago: 0,
-    entrega: 0,
+    entrega: 0
   });
   const dateNowUse = new Date();
   const [formulario, setFormulario] = useState({
-    nombre: "",
-    telefono: "",
-    tipoentrega: "Retiro del local",
+    nombre: '',
+    telefono: '',
+    tipoentrega: 'Retiro del local',
     fecha: `${dateNowUse.getHours()}:${dateNowUse.getMinutes()}`,
-    tipopago: "Efectivo",
-    comentario: "",
-    direccion: "",
+    tipopago: 'Efectivo',
+    comentario: '',
+    direccion: ''
   });
   const router = useRouter();
 
@@ -45,22 +45,22 @@ const VentaInsert = (props) => {
     if (globalVars) {
       setUserVars({
         telefono: globalVars[0].valor,
-        direccion: globalVars[3].valor,
+        direccion: globalVars[3].valor
       });
     }
   }, [globalVars]);
 
   const Entrega = (e, i, uso) => {
     e.preventDefault();
-    if (uso === "tipoPago") {
+    if (uso === 'tipoPago') {
       setTipoSelect({
         ...tipoSelect,
-        pago: i,
+        pago: i
       });
-    } else if (uso === "tipoEntrega") {
+    } else if (uso === 'tipoEntrega') {
       setTipoSelect({
         ...tipoSelect,
-        entrega: i,
+        entrega: i
       });
     }
     setFormulario({ ...formulario, [e.target.name]: e.target.value });
@@ -70,12 +70,12 @@ const VentaInsert = (props) => {
     e.preventDefault();
     const { name, value } = e.target;
 
-    if (name === "productos") {
+    if (name === 'productos') {
       return clickBandera(null, true);
     }
     setFormulario({
       ...formulario,
-      [name]: value,
+      [name]: value
     });
   };
   const clickBandera = (ev, value) => {
@@ -89,14 +89,14 @@ const VentaInsert = (props) => {
     );
     const venta = {
       iduser: 0,
-      CP: "5900",
+      CP: '5900',
       destino_calle: null,
       destino_nro: null,
       destino_dpto: null,
       destino_barrio: null,
       destino_ciudad: formulario.direccion,
       tel_form: formulario.telefono,
-      tipo_alta: "Web",
+      tipo_alta: 'Web',
       entrega: formulario.tipoentrega,
       otra_persona: 0,
       retira_nombre: formulario.nombre,
@@ -104,9 +104,9 @@ const VentaInsert = (props) => {
       montototal: total,
       tipo_pago: formulario.tipopago,
       seguimiento_idestado: 2,
-      estado: "Pendiente",
+      estado: 'Pendiente',
       anulado_porque: null,
-      fec_anulado: null,
+      fec_anulado: null
     };
     return venta;
   };
@@ -116,16 +116,16 @@ const VentaInsert = (props) => {
       const venta = venta_add();
       await APIConsultas.ventas.VENTAS_ADD(venta, productos, formulario);
       closeModal();
-      router.push("/admin");
+      router.push('/admin');
     } catch (error) {
-      console.error("alta de venta ", error);
+      console.error('alta de venta ', error);
     }
   };
 
   const closeModal = (ev) => {
     ev?.preventDefault();
     props.close(false);
-    router.push("/admin");
+    router.push('/admin');
   };
   const retProductos = (ev) => {
     setProductos(ev);
@@ -193,14 +193,14 @@ const VentaInsert = (props) => {
                   {tipoPago.map((tipo, index) => (
                     <button
                       key={index}
-                      onClick={(e) => Entrega(e, index, "tipoPago")}
+                      onClick={(e) => Entrega(e, index, 'tipoPago')}
                       value={tipo.nombre}
                       name="tipopago"
                       id="tipopago"
                       className={`text-[12px] py-[.4rem] font-semibold border-2  border-primary-500 rounded-xl cursor-pointer w-full ${
                         tipoSelect.pago === index
-                          ? "bg-green-800 text-white border-green-800"
-                          : ""
+                          ? 'bg-green-800 text-white border-green-800'
+                          : ''
                       }`}
                     >
                       {tipo.nombre}
@@ -219,14 +219,14 @@ const VentaInsert = (props) => {
                   {tipoEntrega.map((tipo, index) => (
                     <button
                       key={index}
-                      onClick={(e) => Entrega(e, index, "tipoEntrega")}
+                      onClick={(e) => Entrega(e, index, 'tipoEntrega')}
                       value={tipo.nombre}
                       name="tipoentrega"
                       id="tipoentrega"
                       className={`text-[12px] py-[.4rem] font-semibold border-2  border-primary-500 rounded-xl cursor-pointer w-full ${
                         tipoSelect.entrega === index
-                          ? "bg-green-800 text-white border-green-800"
-                          : ""
+                          ? 'bg-green-800 text-white border-green-800'
+                          : ''
                       }`}
                     >
                       {tipo.nombre}
@@ -234,7 +234,7 @@ const VentaInsert = (props) => {
                   ))}
                 </div>
               </div>
-              {formulario.tipoentrega === "Envio a domicilio" && (
+              {formulario.tipoentrega === 'Envio a domicilio' && (
                 <div className="grid grid-cols-1 mr-3 w-full">
                   <label
                     className="text-sm text-black font-bold text-light mt-2"

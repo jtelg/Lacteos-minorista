@@ -1,11 +1,11 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 export class SelectorIndexCaja extends Component {
   state = {
     indicesMuestra: [],
     arrVentas: [],
     arrEgresos: [],
     dataCaja: null,
-    indexSelect: 0,
+    indexSelect: 0
   };
 
   static getDerivedStateFromProps(props, state) {
@@ -21,12 +21,12 @@ export class SelectorIndexCaja extends Component {
     }
     const indicesMuestra = [
       {
-        titulo: "ingresos",
-        descrip: "Ingresos por caja",
-        buttonTitle: "Nueva Orden",
+        titulo: 'ingresos',
+        descrip: 'Ingresos por caja',
+        buttonTitle: 'Nueva Orden',
         count: countVentas,
-        id: 0,
-      },
+        id: 0
+      }
       // {
       //   titulo: "egresos",
       //   descrip: "Egresos por caja.",
@@ -40,14 +40,14 @@ export class SelectorIndexCaja extends Component {
         indicesMuestra,
         arrVentas: props.arrVentas,
         dataCaja: props.dataCaja,
-        indexSelect: props.indexSelect,
+        indexSelect: props.indexSelect
       };
     }
     return {
       indicesMuestra,
       arrVentas: props.arrVentas,
       dataCaja: props.dataCaja,
-      indexSelect: props.indexSelect,
+      indexSelect: props.indexSelect
     };
   }
 
@@ -56,7 +56,7 @@ export class SelectorIndexCaja extends Component {
     const filter =
       this.state.dataCaja.idcaja > 0
         ? `&idc=${this.state.dataCaja.idcaja}`
-        : "";
+        : '';
     return this.props.router.push(
       `/admin?s=${this.props.text_use}&sc=${indice.titulo}${filter}`
     );
@@ -76,7 +76,7 @@ export class SelectorIndexCaja extends Component {
             <div
               className={`${
                 this.state.indexSelect === indice.id &&
-                "border-2 bg-primary-500"
+                'border-2 bg-primary-500'
               } border-2 transition-all border-primary-500 h-full flex items-center px-[1rem] py-1 shadow-sm rounded-[1rem] cursor-pointer`}
               onClick={() => this.selector(indice)}
               role="button"
@@ -87,8 +87,8 @@ export class SelectorIndexCaja extends Component {
                   <div
                     className={`uppercase font-normal tracking-tighter text-[15px] ${
                       this.state.indexSelect === indice.id
-                        ? "text-white"
-                        : "text-primary-500"
+                        ? 'text-white'
+                        : 'text-primary-500'
                     }`}
                   >
                     {indice.titulo}
@@ -99,8 +99,8 @@ export class SelectorIndexCaja extends Component {
                     <h4
                       className={`text-[15px] font-bold ${
                         this.state.indexSelect === indice.id
-                          ? "text-yellow-500 "
-                          : "text-primary-500"
+                          ? 'text-yellow-500 '
+                          : 'text-primary-500'
                       } `}
                     >
                       {indice.count}

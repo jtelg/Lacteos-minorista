@@ -1,9 +1,9 @@
-import { Component } from "react";
+import { Component } from 'react';
 
 class CellRolUsuario extends Component {
   colorsCells = {
-    Admin: "bg-secondary",
-    Cliente: "bg-primary-500",
+    Admin: 'bg-secondary',
+    Cliente: 'bg-primary-500'
   };
 
   setColorEstadoVenta(row) {

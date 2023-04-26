@@ -1,31 +1,31 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import Swal from "sweetalert2";
+import Swal from 'sweetalert2';
 
-import axios from "axios";
+import axios from 'axios';
 
-import ModalView from "../../utils/modalView";
+import ModalView from '../../utils/modalView';
 
 const UsuarioInsert = ({ open, close, router }) => {
   const [usuario, setUsuario] = useState({
-    role: "",
-    nombre: "",
-    pass: "",
-    image: "",
+    role: '',
+    nombre: '',
+    pass: '',
+    image: '',
     tipodoc: 1,
-    numdoc: "",
-    telefono: "",
-    email: "",
-    fecregistro: "",
+    numdoc: '',
+    telefono: '',
+    email: '',
+    fecregistro: '',
     recibe_oferta: 0,
-    tipoCliente: "A",
+    tipoCliente: 'A'
   });
 
   const handlerChange = (e) => {
     e.preventDefault();
     setUsuario({
       ...usuario,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value
     });
   };
 
@@ -39,24 +39,24 @@ const UsuarioInsert = ({ open, close, router }) => {
       usuario.email.length > 0 &&
       usuario.tipoCliente.length > 0
     ) {
-      const resp = await axios.post("/api/user/login?path=SAVE_USER", {
-        usuario,
+      const resp = await axios.post('/api/user/login?path=SAVE_USER', {
+        usuario
       });
       if (resp.status === 200) {
         Swal.fire({
-          icon: "success",
-          title: "Usuario creado",
+          icon: 'success',
+          title: 'Usuario creado',
           showConfirmButton: false,
-          timer: 1500,
+          timer: 1500
         });
         setActualizar(true);
       }
       closeModal();
     } else {
       Swal.fire({
-        icon: "error",
-        text: "Something went wrong!",
-        showConfirmButton: false,
+        icon: 'error',
+        text: 'Something went wrong!',
+        showConfirmButton: false
       });
     }
   };
@@ -64,7 +64,7 @@ const UsuarioInsert = ({ open, close, router }) => {
   const closeModal = (ev) => {
     ev?.preventDefault();
     close(false);
-    router.push("/admin");
+    router.push('/admin');
   };
 
   return (

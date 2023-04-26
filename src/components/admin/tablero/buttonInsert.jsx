@@ -1,15 +1,15 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import ProductoInsert from "../productoForm/productoInsert";
-import VentaInsert from "../../admin/ventas/ventaInsert";
-import EgresoInsert from "../ventas/egresoInsert";
-import UsuarioInsert from "../usuariosForm/usuarioInsert";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import ProductoInsert from '../productoForm/productoInsert';
+import VentaInsert from '../../admin/ventas/ventaInsert';
+import EgresoInsert from '../ventas/egresoInsert';
+import UsuarioInsert from '../usuariosForm/usuarioInsert';
 export class ButtonInsert extends Component {
   state = {
     altaProd: false,
     altaVenta: false,
     altaEgreso: false,
-    altaUsuario: false,
+    altaUsuario: false
   };
 
   componentDidMount() {
@@ -23,22 +23,22 @@ export class ButtonInsert extends Component {
     if (this.props.obj_use.ind_use === 1) {
       // inserta un nuevo producto
       // actualiza la url del navegador
-      window.history.pushState(null, "", "/admin?use=altaProd");
+      window.history.pushState(null, '', '/admin?use=altaProd');
       // abre el modal de alta, ya que al actualizar y no recargar pagina no se abre solo.
       this.setState({ altaProd: true });
     } else if (this.props.obj_use.ind_use === 0) {
-      if (this.props.obj_use.buttonTitle === "Nueva Orden") {
+      if (this.props.obj_use.buttonTitle === 'Nueva Orden') {
         // inserta una nueva orden
-        window.history.pushState(null, "", "/admin?use=altaVenta");
+        window.history.pushState(null, '', '/admin?use=altaVenta');
         // abre el modal de ordenes
         this.setState({ altaVenta: true });
-      } else if (this.props.obj_use.buttonTitle === "Nuevo Egreso") {
+      } else if (this.props.obj_use.buttonTitle === 'Nuevo Egreso') {
         // inserta un nuevo Egreso
-        window.history.pushState(null, "", "/admin?use=altaEgreso");
+        window.history.pushState(null, '', '/admin?use=altaEgreso');
         this.setState({ altaEgreso: true });
       }
     } else if (this.props.obj_use.ind_use === 2) {
-      window.history.pushState(null, "", "/admin?use=altaUsuario");
+      window.history.pushState(null, '', '/admin?use=altaUsuario');
       this.setState({ altaUsuario: true });
     }
   }

@@ -1,18 +1,18 @@
-import React, { Component } from "react";
-import Box from "@mui/material/Box";
-import { DataGrid, GridToolbarQuickFilter } from "@mui/x-data-grid";
-import OrderModals from "./columns/caja/cellEstadoVenta/actions/ventaModal";
+import React, { Component } from 'react';
+import Box from '@mui/material/Box';
+import { DataGrid, GridToolbarQuickFilter } from '@mui/x-data-grid';
+import OrderModals from './columns/caja/cellEstadoVenta/actions/ventaModal';
 export class GridConfig extends Component {
   state = {
     pedidoSelect: null,
-    pageSize: 10,
+    pageSize: 10
   };
 
   openOrder(dataRow) {
     if (
-      dataRow.field !== "estadoOrder" &&
-      dataRow.field !== "ViewProds" &&
-      dataRow.field !== "anular"
+      dataRow.field !== 'estadoOrder' &&
+      dataRow.field !== 'ViewProds' &&
+      dataRow.field !== 'anular'
     )
       return;
     this.setState({ pedidoSelect: { field: dataRow.field, row: dataRow.row } });
@@ -58,7 +58,7 @@ function QuickSearchToolbar() {
     <Box
       sx={{
         p: 0.5,
-        pb: 0,
+        pb: 0
       }}
     >
       <GridToolbarQuickFilter placeholder="Buscar " />

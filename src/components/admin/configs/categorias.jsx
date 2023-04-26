@@ -21,7 +21,7 @@ const Accionesfull = (setSub_categ, setCateg) => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [rows, setRows] = useState([]);
+  // const [rows, setRows] = useState([]);
   const [name, setName] = useState("");
   const [subcateg, setSubcateg] = useState([]);
   const columns = [
@@ -122,7 +122,7 @@ const Accionesfull = (setSub_categ, setCateg) => {
     onClickAction,
     handleClose,
     handleOpen,
-    rows,
+    // rows,
     open,
     columns,
     name,
@@ -137,7 +137,7 @@ const Categorias = ({ setSub_categ, setCateg }) => {
     edit,
     handleClose,
     handleOpen,
-    rows,
+    // rows,
     open,
     columns,
     name,
@@ -162,7 +162,7 @@ const Categorias = ({ setSub_categ, setCateg }) => {
 
           <div className="w-full h-96 bg-white">
             <DataGrid
-              rows={rows}
+              rows={[]}
               columns={columns}
               pageSize={10}
               rowsPerPageOptions={[5, 10, 15, 20, 25, 30]}
